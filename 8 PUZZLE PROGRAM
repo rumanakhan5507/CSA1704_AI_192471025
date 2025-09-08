@@ -1,0 +1,57 @@
+from collections import deque
+
+
+def print_puzzle(state):
+    for i in range(0, 9, 3):
+        print(state[i:i+3])
+    print()
+
+
+def get_moves(state):
+    moves = []
+    pos = state.index("0")  # find empty space (0)
+    row, col = divmod(pos, 3)
+
+    # Possible directions: up, down, left, right
+    directions = [(-1,0),(1,0),(0,-1),(0,1)]
+    for dr, dc in directions:
+        r, c = row+dr, col+dc
+        if 0 <= r < 3 and 0 <= c < 3:
+            new_pos = r*3 + c
+            state_list = list(state)
+            # swap 0 with neighbor
+            state_list[pos], state_list[new_pos] = state_list[new_pos], state_list[pos]
+            moves.append("".join(state_list))
+    return moves
+
+
+def bfs(start, goal):
+    visited = set()
+    queue = deque([(start, [start])])
+
+    while queue:
+        state, path = queue.popleft()
+        if state == goal:
+            return path
+        if state not in visited:
+            visited.add(state)
+            for move in get_moves(state):
+                queue.append((move, path+[move]))
+    return None
+
+# Main program
+if __name__ == "__main__":
+    start = "123405678"   # initial puzzle state (0 = blank)
+    goal  = "123456780"   # goal state
+
+    print("Start state:")
+    print_puzzle(start)
+
+    path = bfs(start, goal)
+
+    if path:
+        print("Solution found in", len(path)-1, "moves!\n")
+        for step in path:
+            print_puzzle(step)
+    else:
+        print("No solution found.")
