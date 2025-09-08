@@ -1,0 +1,38 @@
+def vacuum_world(initial_state):
+    # initial_state = (vacuum_position, roomA, roomB)
+    # vacuum_position ∈ ["A", "B"]
+    # roomA, roomB ∈ ["Clean", "Dirty"]
+
+    position, roomA, roomB = initial_state
+    steps = []
+
+    while roomA == "Dirty" or roomB == "Dirty":
+        if position == "A":
+            if roomA == "Dirty":
+                steps.append("Vacuum A")
+                roomA = "Clean"
+            else:
+                steps.append("Move Right to B")
+                position = "B"
+
+        elif position == "B":
+            if roomB == "Dirty":
+                steps.append("Vacuum B")
+                roomB = "Clean"
+            else:
+                steps.append("Move Left to A")
+                position = "A"
+
+    return steps
+
+
+# Example run
+if __name__ == "__main__":
+    # initial state: Vacuum at A, Room A dirty, Room B dirty
+    initial = ("A", "Dirty", "Dirty")
+
+    actions = vacuum_world(initial)
+    print("Initial state:", initial)
+    print("\nActions taken by vacuum cleaner:")
+    for step in actions:
+        print("-", step)
