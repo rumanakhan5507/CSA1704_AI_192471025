@@ -1,0 +1,15 @@
+# Simple Decision Tree using sklearn
+
+from sklearn import tree
+
+# Dataset: [Weather, Temperature] => Play
+# Weather: 0=Sunny, 1=Rainy
+# Temp: 0=Cold, 1=Hot
+X = [[0,0],[0,1],[1,0],[1,1]]
+y = ["Play","Don't Play","Play","Don't Play"]
+
+clf = tree.DecisionTreeClassifier()
+clf = clf.fit(X, y)
+
+# Predict
+print("Prediction for [Sunny, Hot]:", clf.predict([[0,1]]))
