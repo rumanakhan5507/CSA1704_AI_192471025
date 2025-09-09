@@ -1,0 +1,11 @@
+% sum(N, Result) :- Result is sum of integers 1 to N
+
+sum(0, 0).
+sum(N, Result) :-
+    N > 0,
+    N1 is N - 1,
+    sum(N1, Temp),
+    Result is Temp + N.
+EXAMPLE QUERY:
+?- sum(5, R).
+R = 15.
