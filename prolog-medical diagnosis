@@ -1,0 +1,17 @@
+% symptom(Disease, Symptom)
+symptom(flu, fever).
+symptom(flu, cough).
+symptom(malaria, fever).
+symptom(malaria, chills).
+symptom(cold, sneezing).
+symptom(cold, cough).
+
+diagnosis(Disease) :-
+    write('Enter symptom: '),
+    read(S),
+    symptom(Disease, S).
+EXAMPLE QUERY: 
+?- diagnosis(D).
+Enter symptom: fever.
+D = flu ;
+D = malaria.
