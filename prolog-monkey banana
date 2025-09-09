@@ -1,0 +1,15 @@
+% Simple monkey and banana problem
+
+% state(MonkeyPos, BananaPos, HasBanana)
+
+move(state(monkey, banana, no), grab, state(monkey, banana, yes)).
+
+% Example solution path
+solution :-
+    move(state(monkey, banana, no), grab, state(monkey, banana, yes)),
+    write('Monkey grabs the banana!').
+Example Query:
+
+?- solution.
+Monkey grabs the banana!
+true.
