@@ -1,0 +1,28 @@
+# Alpha-Beta Pruning
+
+def alphabeta(depth, nodeIndex, alpha, beta, isMax, scores, h):
+    if depth == h:
+        return scores[nodeIndex]
+
+    if isMax:
+        best = float('-inf')
+        for i in range(2):
+            val = alphabeta(depth+1, nodeIndex*2+i, alpha, beta, False, scores, h)
+            best = max(best, val)
+            alpha = max(alpha, best)
+            if beta <= alpha:
+                break
+        return best
+    else:
+        best = float('inf')
+        for i in range(2):
+            val = alphabeta(depth+1, nodeIndex*2+i, alpha, beta, True, scores, h)
+            best = min(best, val)
+            beta = min(beta, best)
+            if beta <= alpha:
+                break
+        return best
+
+scores = [3, 5, 6, 9, 1, 2, 0, -1]
+h = 3
+print("Optimal value:", alphabeta(0, 0, float('-inf'), float('inf'), True, scores, h))
