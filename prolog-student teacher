@@ -1,0 +1,10 @@
+% student(Name, SubjectCode, Teacher).
+student(ali, cs101, smith).
+student(ravi, cs101, smith).
+student(anu, cs102, mary).
+
+% Query: student(Name, SubjectCode, Teacher).
+EXAMPLE QUERY: 
+?- student(ravi, Subject, Teacher).
+Subject = cs101,
+Teacher = smith.
