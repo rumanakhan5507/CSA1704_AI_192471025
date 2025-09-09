@@ -1,0 +1,9 @@
+% Simple database
+person(john, '01-01-2000').
+person(sita, '12-05-1999').
+person(ravi, '30-09-2001').
+
+% Query: person(Name, DOB).
+EXAMPLE QUERY:
+?- person(john, DOB).
+DOB = '01-01-2000'.
