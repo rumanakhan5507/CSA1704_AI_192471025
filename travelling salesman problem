@@ -1,0 +1,44 @@
+from itertools import permutations
+
+def travelling_salesman(graph, start):
+    # Get all vertices except the start
+    vertices = list(range(len(graph)))
+    vertices.remove(start)
+
+    min_path = float('inf')
+    best_order = []
+
+    # Try every possible path
+    for order in permutations(vertices):
+        current_cost = 0
+        k = start
+
+        # Travel through the chosen order
+        for j in order:
+            current_cost += graph[k][j]
+            k = j
+
+        # Return to the start city
+        current_cost += graph[k][start]
+
+        # Update minimum path
+        if current_cost < min_path:
+            min_path = current_cost
+            best_order = order
+
+    # Convert path into a nice format
+    best_route = [start] + list(best_order) + [start]
+    return min_path, best_route
+
+
+# Example: Distance matrix of 4 cities
+graph = [
+    [0, 10, 15, 20],
+    [10, 0, 35, 25],
+    [15, 35, 0, 30],
+    [20, 25, 30, 0]
+]
+
+cost, route = travelling_salesman(graph, 0)
+print("Minimum Cost:", cost)
+print("Best Route:", route)
