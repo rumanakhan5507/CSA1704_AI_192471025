@@ -1,0 +1,19 @@
+% vowel(Char)
+vowel(a).
+vowel(e).
+vowel(i).
+vowel(o).
+vowel(u).
+
+% count_vowels(List, Count)
+count_vowels([], 0).
+count_vowels([H|T], Count) :-
+    vowel(H),
+    count_vowels(T, Rest),
+    Count is Rest + 1.
+count_vowels([H|T], Count) :-
+    \+ vowel(H),
+    count_vowels(T, Count).
+Example Query:
+?- count_vowels([h,e,l,l,o], N).
+N = 2.
