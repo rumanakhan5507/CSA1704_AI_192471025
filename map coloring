@@ -1,0 +1,52 @@
+# Map Coloring Problem using CSP (Backtracking)
+
+# Function to check if the current color assignment is safe
+def is_safe(node, color, assignment, graph):
+    for neighbor in graph[node]:
+        if neighbor in assignment and assignment[neighbor] == color:
+            return False
+    return True
+
+# Backtracking function
+def map_coloring(graph, colors, assignment={}, node=0):
+    # If all nodes are assigned a color, return solution
+    if node == len(graph):
+        return assignment
+
+    for color in colors:
+        if is_safe(node, color, assignment, graph):
+            assignment[node] = color
+            result = map_coloring(graph, colors, assignment, node + 1)
+            if result:
+                return result
+            assignment.pop(node)  # Backtrack
+
+    return None
+
+
+# Example: Map with 4 regions (like a square)
+graph = {
+    0: [1, 2],   # Region 0 is adjacent to 1 and 2
+    1: [0, 2, 3],
+    2: [0, 1, 3],
+    3: [1, 2]
+}
+
+colors = ["Red", "Green", "Blue"]
+
+solution = map_coloring(graph, colors)
+
+if solution:
+    print("Map Coloring Solution:")
+    for region, color in solution.items():
+        print(f"Region {region} --> {color}")
+else:
+    print("No solution found.")
+
+OUTPUT: 
+Map Coloring Solution:
+Region 0 --> Red
+Region 1 --> Green
+Region 2 --> Blue
+Region 3 --> Red
+
