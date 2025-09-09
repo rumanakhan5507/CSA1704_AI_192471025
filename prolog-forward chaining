@@ -1,0 +1,15 @@
+% Rules and facts for forward chaining
+fact(a).
+rule(a, b).
+rule(b, c).
+
+forward(X) :- fact(X).
+forward(Y) :-
+    rule(X, Y),
+    forward(X).
+Example Query:
+
+prolog
+Copy code
+?- forward(c).
+true.
