@@ -1,0 +1,10 @@
+% bird(Name, canFly).
+bird(sparrow, yes).
+bird(penguin, no).
+bird(eagle, yes).
+bird(ostrich, no).
+
+% Query: bird(Name, canFly).
+EXAMPLE QUERY:
+?- bird(penguin, CanFly).
+CanFly = no.
