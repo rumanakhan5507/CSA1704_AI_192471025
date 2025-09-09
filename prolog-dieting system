@@ -1,0 +1,10 @@
+% diet(Disease, SuggestedFood).
+diet(diabetes, 'Eat more vegetables and avoid sugar').
+diet(fever, 'Drink fluids and take light food').
+diet(obesity, 'Low fat and high fiber diet').
+
+% Query: diet(Disease, Suggestion).
+Example Query:
+
+?- diet(diabetes, S).
+S = 'Eat more vegetables and avoid sugar'.
