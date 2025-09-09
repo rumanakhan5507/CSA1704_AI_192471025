@@ -1,0 +1,21 @@
+% Facts
+fact(sun).
+fact(warm).
+
+% Rules
+rule(happy, [sun, warm]).
+rule(play, [happy]).
+
+% Backward chaining
+prove(X) :- fact(X).
+prove(X) :-
+    rule(X, L),
+    prove_all(L).
+
+prove_all([]).
+prove_all([H|T]) :- prove(H), prove_all(T).
+Example Query:
+
+prolog
+?- prove(play).
+true.
