@@ -1,0 +1,38 @@
+% Best First Search using heuristic
+
+edge(a, b, 2).
+edge(a, c, 1).
+edge(b, d, 5).
+edge(c, d, 3).
+edge(d, goal, 1).
+
+% heuristic(Node, H)
+heuristic(a, 4).
+heuristic(b, 3).
+heuristic(c, 2).
+heuristic(d, 1).
+heuristic(goal, 0).
+
+best_first_search(Start, Goal, Path) :-
+    best_first([[Start]], Goal, RevPath),
+    reverse(RevPath, Path).
+
+best_first([[Goal|Rest]|_], Goal, [Goal|Rest]).
+best_first([Path|Paths], Goal, Sol) :-
+    Path = [Current|_],
+    findall([Next,Current|Path],
+            (edge(Current, Next, _), \+ member(Next, Path)),
+            NewPaths),
+    evaluate(NewPaths, Scored),
+    append(Paths, Scored, Temp),
+    sort(Temp, Sorted),
+    best_first(Sorted, Goal, Sol).
+
+evaluate([], []).
+evaluate([[N|Rest]|Paths], [[F,[N|Rest]]|Evals]) :-
+    heuristic(N, H),
+    F is H,
+    evaluate(Paths, Evals).
+    EXAMPLE QUERY: 
+?- best_first_search(a, goal, Path).
+Path = [a, c, d, goal].
