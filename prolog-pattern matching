@@ -1,0 +1,7 @@
+% match(Pattern, List)
+match([], _).
+match([H|T], [H|Rest]) :- match(T, Rest).
+match(Pattern, [_|Rest]) :- match(Pattern, Rest).
+Example Query:
+?- match([a, b], [c, a, b, d]).
+true.
